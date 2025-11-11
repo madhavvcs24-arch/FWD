@@ -3,74 +3,112 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>BMSCE • Placement & Alumni Connect</title>
+  <title>Student Sign Up • College Placement Connect</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#f7f9fc; --card:#fff; --text:#0f172a; --muted:#4b5563;
-      --ring:#dbeafe; --blue:#2563eb; --purple:#7c3aed; --shadow:0 10px 25px rgba(2,6,23,.08);
-    }
+    :root{--bg:#f7f9fc;--card:#fff;--text:#0f172a;--muted:#475569;--ring:#dbeafe;--shadow:0 12px 30px rgba(2,6,23,.10)}
     *{box-sizing:border-box}
     body{
-      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;
-      background:var(--bg); color:var(--text);
+      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial; color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 10% -10%, #eef2ff 0%, transparent 60%),
+        radial-gradient(1000px 700px at 110% 10%, #e0f2fe 0%, transparent 55%),
+        var(--bg);
+      min-height:100vh;
     }
-    .container{max-width:1100px;margin:0 auto;padding:40px 20px 80px;text-align:center}
-
-    .title{font-size:32px;font-weight:800;margin:20px 0 6px}
-    .subtitle{color:var(--muted);margin-bottom:32px}
-
-    .grid{display:grid;gap:30px}
-    @media(min-width:900px){.grid{grid-template-columns:1fr 1fr}}
-
-    .card{
-      background:var(--card); border:1px solid #e5e7eb; border-radius:16px;
-      padding:26px; box-shadow:var(--shadow); text-align:left; transition:.2s;
-    }
-    .card:hover{transform:translateY(-4px); box-shadow:0 16px 40px rgba(2,6,23,.12)}
-
-    .btn{
-      width:100%; padding:12px; border-radius:12px; border:none; cursor:pointer;
-      color:#fff; font-weight:600; font-size:16px; margin-top:10px;
-    }
-    .btn-blue{background:linear-gradient(135deg,#3b82f6,#1d4ed8)}
-    .btn-purple{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
-    .footer a{
-      display:inline-block;margin-top:30px;padding:10px 16px;border-radius:12px;
-      border:1px solid #ddd;background:#fff;text-decoration:none;color:#000;
-      font-weight:600;
-    }
+    .nav{position:sticky;top:0;background:#ffffffc7;backdrop-filter:saturate(180%) blur(8px);border-bottom:1px solid #eef2ff}
+    .nav-inner{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:12px 18px}
+    .brand{display:flex;gap:10px;align-items:center;font-weight:800}
+    .menu a{margin-left:14px;text-decoration:none;color:#111827;font-weight:600}
+    .hero{color:#0f172a;text-align:center;padding:40px 18px}
+    .wrap{max-width:880px;margin:0 auto;padding:0 18px 70px}
+    .card{background:#fff;border:1px solid #eef2ff;border-radius:16px;padding:24px;box-shadow:var(--shadow);margin-top:12px}
+    .grid{display:grid;grid-template-columns:1fr;gap:14px}
+    @media(min-width:860px){.grid{grid-template-columns:1fr 1fr}}
+    label{font-weight:600;margin:6px 0 6px;display:block}
+    .input,.select{width:100%;padding:12px 14px;border:1px solid #e5e7eb;border-radius:12px;font-size:15px;outline:none}
+    .input:focus,.select:focus{border-color:#93c5fd;box-shadow:0 0 0 4px var(--ring)}
+    .pwdrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+    .toggle{border:1px solid #e5e7eb;border-radius:10px;padding:10px 12px;background:#fff;cursor:pointer}
+    .btn{display:block;width:100%;border:0;border-radius:12px;padding:12px 16px;font-weight:700;color:#fff;background:linear-gradient(135deg,#3b82f6,#1d4ed8);cursor:pointer}
+    .muted{color:var(--muted);font-size:14px}
+    .hint{font-size:12px;color:#64748b;margin-top:4px}
+    .msg{display:none;margin-top:8px}
+    .ok{color:#065f46}.err{color:#b91c1c}
   </style>
 </head>
-
 <body>
-  <div class="container">
-    <h1 class="title">Placement & Alumni Connect</h1>
-    <p class="subtitle">BMS College of Engineering</p>
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">🎓 College Placement Connect</div>
+      <div class="menu">
+        <!-- Home should go to index.html (rename 1.html to index.html for GitHub Pages) -->
+        <a href="index.html">Home</a>
+        <a href="st.html">Sign in</a>
+      </div>
+    </div>
+  </nav>
 
-    <div class="grid">
+  <header class="hero">
+    <h1>Create your student account</h1>
+    <p>Use your <strong>@bmsce.ac.in</strong> email to register and access placements & alumni.</p>
+  </header>
 
-      <div class="card">
-        <h2>Student Portal</h2>
-        <p>Access placement information and connect with alumni.</p>
-        <button class="btn btn-blue" onclick="window.location.href='st.html'">Student Login</button>
+  <div class="wrap">
+    <form class="card" onsubmit="return signup(event)">
+      <div class="grid">
+        <div><label>Full Name</label><input id="name" class="input" required></div>
+        <div><label>USN</label><input id="usn" class="input" required placeholder="1BM21CS123"></div>
+        <div><label>College Email</label><input id="email" type="email" class="input" required placeholder="you@bmsce.ac.in"><div class="hint">Must be @bmsce.ac.in</div></div>
+        <div><label>Branch</label><select id="branch" class="select" required><option value="">Select branch</option><option>CSE</option><option>ISE</option><option>ECE</option><option>EEE</option><option>ME</option></select></div>
+        <div><label>Graduation Year</label><select id="grad" class="select" required></select></div>
+        <div><label>Current CGPA (optional)</label><input id="cgpa" type="number" step="0.01" min="0" max="10" class="input"></div>
+        <div class="pwdrow"><div><label>Password</label><input id="pwd" type="password" class="input" required></div><button class="toggle" type="button" onclick="toggle('pwd',this)">Show</button></div>
+        <div class="pwdrow"><div><label>Confirm Password</label><input id="cpwd" type="password" class="input" required></div><button class="toggle" type="button" onclick="toggle('cpwd',this)">Show</button></div>
       </div>
 
-      <div class="card">
-        <h2>Admin Portal</h2>
-        <p>Manage alumni and placement data efficiently.</p>
-        <button class="btn btn-purple" onclick="window.location.href='adminlogin.html'">Admin Login</button>
-      </div>
+      <div id="ok" class="msg ok">Account created! Redirecting…</div>
+      <div id="err" class="msg err">Error</div>
 
-    </div>
-
-    <div class="footer">
-      <a href="dash.html">Browse as Guest →</a>
-    </div>
-
+      <div style="margin-top:12px"><button class="btn" type="submit">Create Account</button></div>
+      <p class="muted" style="margin-top:10px">Already have an account? <a href="st.html"><strong>Sign in</strong></a></p>
+    </form>
   </div>
+
+  <script>
+    // fill grad years
+    (function(){
+      const s=document.getElementById('grad'), y=new Date().getFullYear();
+      [y,y+1,y+2,y+3].forEach(v=>{const o=document.createElement('option');o.value=v;o.textContent=v;s.appendChild(o);});
+    })();
+    function toggle(id,btn){ const i=document.getElementById(id); i.type=i.type==='password'?'text':'password'; btn.textContent=i.type==='password'?'Show':'Hide'; }
+    function show(el,msg){const n=document.getElementById(el);n.textContent=msg;n.style.display='block';}
+    function hide(el){document.getElementById(el).style.display='none';}
+    function signup(e){
+      e.preventDefault();
+      hide('ok'); hide('err');
+      const email=document.getElementById('email').value.trim();
+      const pwd=document.getElementById('pwd').value;
+      const cpwd=document.getElementById('cpwd').value;
+      if(!/@bmsce\.ac\.in$/i.test(email)){ show('err','Use your official @bmsce.ac.in email.'); return false; }
+      if(pwd.length<8){ show('err','Password must be at least 8 characters.'); return false; }
+      if(pwd!==cpwd){ show('err','Passwords do not match.'); return false; }
+      // demo save
+      const users = JSON.parse(localStorage.getItem('students')||'[]');
+      if(users.some(u=>u.email.toLowerCase()===email.toLowerCase())){ show('err','Account already exists.'); return false; }
+      users.push({
+        name:document.getElementById('name').value.trim(),
+        usn:document.getElementById('usn').value.trim(),
+        email, branch:document.getElementById('branch').value,
+        grad:document.getElementById('grad').value, cgpa:document.getElementById('cgpa').value
+      });
+      localStorage.setItem('students', JSON.stringify(users));
+      show('ok','Account created! Redirecting to sign in…');
+      setTimeout(()=>location.href='st.html', 900);
+      return false;
+    }
+  </script>
 </body>
 </html>
