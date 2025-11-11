@@ -8,28 +8,60 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{--bg:#f7f9fc;--card:#ffffff;--text:#0f172a;--muted:#475569;--ring:#dbeafe;--gradTop:#0b63f3;--gradBot:#0a3be0;--shadow:0 12px 30px rgba(2,6,23,.10)}
+    :root{
+      --bg:#f7f9fc;--card:#ffffff;--text:#0f172a;--muted:#475569;--ring:#dbeafe;
+      --gradTop:#0b63f3;--gradBot:#0a3be0;--shadow:0 12px 30px rgba(2,6,23,.10);
+    }
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;color:var(--text);background:radial-gradient(1200px 800px at 10% -10%,#eef2ff 0%,transparent 60%),radial-gradient(1000px 700px at 110% 10%,#e0f2fe 0%,transparent 55%),var(--bg);min-height:100vh;display:flex;justify-content:center;align-items:center;padding:20px}
-    .card{background:#fff;width:100%;max-width:480px;padding:32px;border-radius:18px;box-shadow:var(--shadow);border:1px solid #eef2ff}
-    h1{font-size:26px;font-weight:800;text-align:center;margin-bottom:6px}
-    p.sub{text-align:center;color:var(--muted);margin-bottom:22px}
+    body{
+      font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;
+      color:var(--text);
+      background:var(--bg);
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+      background:
+        radial-gradient(1200px 800px at 10% -10%, #eef2ff 0%, transparent 60%),
+        radial-gradient(1000px 700px at 110% 10%, #e0f2fe 0%, transparent 55%),
+        var(--bg);
+    }
+    .card{
+      background:var(--card);
+      width:100%;
+      max-width:460px;
+      padding:38px 32px;
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      border:1px solid #eef2ff;
+    }
+    h1{font-size:26px;font-weight:800;text-align:center;margin-bottom:8px}
+    p.sub{text-align:center;color:var(--muted);margin-bottom:26px}
     label{font-weight:600;margin-bottom:6px;display:block}
-    .input{width:100%;padding:12px 14px;border-radius:12px;border:1px solid #e5e7eb;outline:none;font-size:15px;margin-bottom:12px}
+    .input{
+      width:100%;padding:12px 14px;border-radius:12px;border:1px solid #e5e7eb;
+      outline:none;font-size:15px;margin-bottom:16px;background:#fff;
+    }
     .input:focus{border-color:#93c5fd;box-shadow:0 0 0 4px var(--ring)}
-    .btn{width:100%;border:0;padding:13px;border-radius:12px;font-weight:700;font-size:16px;background:linear-gradient(135deg,var(--gradTop),var(--gradBot));color:#fff;cursor:pointer;margin-top:6px}
-    .toplinks{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-    a.link{font-weight:600;color:#0f172a;text-decoration:none}
+    .btn{
+      width:100%;border:0;padding:13px;border-radius:12px;font-weight:700;font-size:16px;
+      background:linear-gradient(135deg,var(--gradTop),var(--gradBot));color:#fff;cursor:pointer;margin-top:6px
+    }
+    .muted{color:var(--muted);font-size:14px;text-align:center;margin-top:12px}
+    .toplink{
+      position:absolute;top:22px;left:22px;text-decoration:none;font-weight:600;color:var(--text)
+    }
+    .link{color:#1f2937;text-decoration:none;font-weight:700}
   </style>
 </head>
 <body>
+  <!-- Back to landing (1.html) -->
+  <a href="1.html" class="toplink">← Back</a>
+
   <div class="card">
-    <div class="toplinks">
-      <a class="link" href="#" onclick="goBack();return false;">← Back</a>
-      <a class="link" href="index.html">Home</a>
-    </div>
     <h1>Student Login</h1>
-    <p class="sub">Use your college credentials</p>
+    <p class="sub">Sign in using your college credentials</p>
 
     <label for="usn">USN / College Email</label>
     <input id="usn" class="input" type="text" placeholder="1BM21CS123 / name@bmsce.ac.in">
@@ -39,24 +71,19 @@
 
     <button class="btn" onclick="login()">Sign In</button>
 
-    <p class="sub" style="margin-top:12px">
-      New here? <a class="link" href="sgn%20up.html">Create an account</a>
-      <!-- If you rename the file to signup.html, change the href to signup.html -->
+    <!-- NEW: sign up link -->
+    <p class="muted">Don’t have an account?
+      <a class="link" href="sgn up.html">Sign up</a>
     </p>
   </div>
 
   <script>
-    function goBack(){
-      if (document.referrer) history.back();
-      else location.href = 'index.html';
-    }
     function login(){
       const id = document.getElementById('usn').value.trim();
       const pw = document.getElementById('pwd').value.trim();
       if(!id || !pw){ alert('Please fill both fields.'); return; }
-      // (Optional) set a demo session flag
-      localStorage.setItem('session','student');
-      location.href = 'dash.html';
+      // On success, go to dashboard
+      window.location.href = 'dash.html';
     }
   </script>
 </body>
