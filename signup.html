@@ -1,62 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Student Sign Up • College Placement Connect</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body{
-      margin:0; font-family:Inter, sans-serif; background:#f7f9fc; color:#0f172a;
-    }
-    .hero{
-      background:linear-gradient(135deg,#0b63f3,#0a3be0); color:#fff;
-      text-align:center; padding:40px 20px;
-    }
-    .hero h1{margin:0; font-size:28px; font-weight:800;}
-
-    .wrap{
-      max-width:420px; margin:50px auto; background:#fff; border-radius:14px;
-      box-shadow:0 12px 30px rgba(0,0,0,.08); padding:28px;
-    }
-    input{
-      width:100%; padding:12px; border:1px solid #dcdcdc; border-radius:10px;
-      margin:10px 0; font-size:15px;
-    }
-    button{
-      width:100%; padding:12px; border:none; border-radius:10px; margin-top:10px;
-      background:linear-gradient(135deg,#3b82f6,#1d4ed8); color:#fff; font-weight:700;
-      cursor:pointer;
-    }
-    .links{ text-align:center; margin-top:14px; font-size:14px; }
-    a{ color:#2563eb; text-decoration:none; font-weight:600; }
+    :root{--bg:#f7f9fc;--card:#fff;--text:#0f172a;--muted:#475569;--ring:#dbeafe;--blue:#2563eb;--shadow:0 12px 30px rgba(2,6,23,.10);--gradTop:#0b63f3;--gradBot:#0a3be0}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;color:var(--text);background:var(--bg)}
+    a{color:inherit;text-decoration:none}
+    .nav{position:sticky;top:0;z-index:50;background:#ffffffc7;backdrop-filter:saturate(180%) blur(8px)}
+    .nav-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 18px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .brand .logo{width:34px;height:34px;border-radius:9px;background:#e8f0ff;display:grid;place-items:center}
+    .menu{display:flex;gap:22px}
+    .menu a{color:#111827;font-weight:600;opacity:.85}
+    .menu a:hover{opacity:1}
+    .hero{background:linear-gradient(135deg,var(--gradTop),var(--gradBot));color:#fff}
+    .hero-inner{max-width:1120px;margin:0 auto;padding:40px 18px 70px;text-align:center}
+    .hero h1{margin:8px 0 8px;font-size:26px;font-weight:800}
+    .hero p{margin:0 auto 12px;max-width:760px;opacity:.95}
+    .wrap{max-width:880px;margin:0 auto;padding:0 18px 60px}
+    .card{background:var(--card);border:1px solid #eef2ff;border-radius:16px;padding:24px;box-shadow:var(--shadow);margin-top:-40px}
+    .grid{display:grid;grid-template-columns:1fr;gap:14px}
+    @media(min-width:860px){.grid{grid-template-columns:1fr 1fr}}
+    label{font-weight:600;margin:6px 0 6px;display:block}
+    .input,.select{width:100%;padding:12px 14px;border:1px solid #e5e7eb;border-radius:12px;background:#fff;outline:none;font-size:15px}
+    .input:focus,.select:focus{border-color:#93c5fd;box-shadow:0 0 0 4px var(--ring)}
+    .row{display:flex;align-items:center;gap:10px}
+    .btn{border:0;border-radius:12px;padding:12px 16px;font-weight:700;color:#fff;background:linear-gradient(135deg,#3b82f6,#1d4ed8);cursor:pointer;width:100%}
+    .muted{color:var(--muted);font-size:14px}
+    .pwdrow{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+    .toggle{border:1px solid #e5e7eb;border-radius:10px;padding:10px 12px;background:#fff;cursor:pointer}
+    .error{color:#b91c1c;font-size:13px;margin-top:6px;display:none}
+    .ok{color:#065f46;font-size:13px;margin-top:6px;display:none}
   </style>
 </head>
 <body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand"><span class="logo">🎓</span><span>College Placement Connect</span></div>
+      <div class="menu">
+        <a href="1.html">Home</a>
+        <a href="st.html">Sign in</a>
+      </div>
+    </div>
+  </nav>
 
-  <div class="hero">
-    <h1>Create Student Account</h1>
-  </div>
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>Create your student account</h1>
+      <p>Use your college email (e.g. <strong>usn@bmsce.ac.in</strong>) to register and access placements & alumni directory.</p>
+    </div>
+  </header>
 
   <div class="wrap">
-    <form onsubmit="event.preventDefault(); signup();">
-      <input type="text" id="name" placeholder="Full Name" required>
-      <input type="text" id="email" placeholder="College Email" required>
-      <input type="password" id="password" placeholder="Create Password" required>
-      <button type="submit">Sign Up</button>
+    <form class="card" id="form" onsubmit="return signup(event)">
+      <div class="grid">
+        <div>
+          <label for="name">Full Name</label>
+          <input id="name" class="input" placeholder="Your name" required>
+        </div>
+        <div>
+          <label for="usn">USN</label>
+          <input id="usn" class="input" placeholder="1BM21CS123" required>
+        </div>
+        <div>
+          <label for="email">College Email</label>
+          <input id="email" type="email" class="input" placeholder="you@bmsce.ac.in" required>
+        </div>
+        <div>
+          <label for="branch">Branch</label>
+          <select id="branch" class="select" required>
+            <option value="">Select branch</option>
+            <option>CSE</option><option>ISE</option><option>ECE</option><option>EEE</option><option>ME</option>
+          </select>
+        </div>
+        <div>
+          <label for="grad">Graduation Year</label>
+          <select id="grad" class="select" required><option value="">Select year</option></select>
+        </div>
+        <div>
+          <label for="cgpa">Current CGPA (optional)</label>
+          <input id="cgpa" type="number" step="0.01" min="0" max="10" class="input" placeholder="e.g., 8.2">
+        </div>
+        <div class="pwdrow">
+          <div>
+            <label for="pwd">Password</label>
+            <input id="pwd" type="password" class="input" placeholder="••••••••" required>
+          </div>
+          <button class="toggle" type="button" onclick="togglePwd('pwd', this)">Show</button>
+        </div>
+        <div class="pwdrow">
+          <div>
+            <label for="cpwd">Confirm Password</label>
+            <input id="cpwd" type="password" class="input" placeholder="••••••••" required>
+          </div>
+          <button class="toggle" type="button" onclick="togglePwd('cpwd', this)">Show</button>
+        </div>
+        <div class="row" style="grid-column:1/-1">
+          <input id="tos" type="checkbox" required>
+          <label for="tos" class="muted">I agree to the college usage policy.</label>
+        </div>
+      </div>
+      <div id="err" class="error">Error</div>
+      <div id="ok" class="ok">Account created! Redirecting…</div>
+      <div style="margin-top:14px"><button class="btn" type="submit">Create Account</button></div>
+      <p class="muted" style="margin-top:12px">Already have an account? <a href="st.html"><strong>Sign in</strong></a></p>
     </form>
-
-    <div class="links">
-      Already have an account? <a href="st.html">Login</a><br><br>
-      <a href="index.html">← Home</a>
-    </div>
   </div>
 
   <script>
-    function signup(){
-      alert("Account created! (No database yet — frontend only)");
-      window.location.href = "st.html";
+    // fill graduation years
+    (function(){
+      const sel = document.getElementById('grad');
+      const now = new Date().getFullYear();
+      [now, now+1, now+2, now+3].forEach(y=>{
+        const o=document.createElement('option'); o.value=y; o.textContent=y; sel.appendChild(o);
+      });
+    })();
+    function togglePwd(id, btn){
+      const inp=document.getElementById(id);
+      const show = inp.type==='password';
+      inp.type = show ? 'text' : 'password';
+      btn.textContent = show ? 'Hide' : 'Show';
+    }
+    function showError(msg){ const e=err, ok=document.getElementById('ok'); ok.style.display='none'; e.textContent=msg; e.style.display='block'; }
+    function showOk(msg){ const e=err, ok=document.getElementById('ok'); e.style.display='none'; ok.textContent=msg; ok.style.display='block'; }
+    function validEmail(email){ return /@bmsce\.ac\.in$/i.test(email); }
+
+    function signup(ev){
+      ev.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const pwd   = document.getElementById('pwd').value;
+      const cpwd  = document.getElementById('cpwd').value;
+      if(!validEmail(email)) { showError('Please use your official @bmsce.ac.in email.'); return false; }
+      if(pwd.length < 8)     { showError('Password must be at least 8 characters.'); return false; }
+      if(pwd !== cpwd)       { showError('Passwords do not match.'); return false; }
+
+      // demo-only “save”
+      const users = JSON.parse(localStorage.getItem('students')||'[]');
+      if(users.some(u=>u.email.toLowerCase()===email.toLowerCase())) {
+        showError('An account with this email already exists.'); return false;
+      }
+      users.push({ email });
+      localStorage.setItem('students', JSON.stringify(users));
+
+      showOk('Account created! Redirecting to sign in…');
+      setTimeout(()=>{ location.href = 'st.html'; }, 900);
+      return false;
     }
   </script>
-
 </body>
 </html>
