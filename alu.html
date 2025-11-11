@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alumni Directory • College Placement Connect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f7f9fc;--card:#fff;--text:#0f172a;--muted:#475569;--ring:#dbeafe;
+      --blue:#2563eb;--shadow:0 12px 30px rgba(2,6,23,.10);
+      --gradTop:#0b63f3;--gradBot:#0a3be0;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;color:var(--text);background:var(--bg)}
+    a{color:inherit;text-decoration:none}
+
+    .nav{position:sticky;top:0;z-index:50;background:#ffffffc7;backdrop-filter:saturate(180%) blur(8px)}
+    .nav-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 18px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .brand .logo{width:34px;height:34px;border-radius:9px;background:#e8f0ff;display:grid;place-items:center}
+    .menu{display:flex;gap:22px;align-items:center}
+    .menu a{color:#111827;font-weight:600;opacity:.85}
+    .menu a:hover{opacity:1}
+    .logout{border:0;border-radius:10px;padding:8px 12px;font-weight:700;color:#fff;background:linear-gradient(135deg,#3b82f6,#1d4ed8);cursor:pointer}
+
+    .hero{background:linear-gradient(135deg,var(--gradTop),var(--gradBot));color:#fff}
+    .hero-inner{max-width:1120px;margin:0 auto;padding:40px 18px 88px;text-align:center}
+    .hero h1{margin:8px 0 10px;font-size:26px;font-weight:800}
+    .hero p{margin:0 auto;max-width:780px;opacity:.95}
+
+    .wrap{max-width:1120px;margin:0 auto;padding:0 18px 60px}
+
+    .searchbar{max-width:600px;margin: -40px auto 32px;border-radius:18px;background:#eef2ff;display:flex;align-items:center;gap:12px;padding:12px 14px;box-shadow:var(--shadow)}
+    .searchbar input{flex:1;border:0;background:transparent;outline:none;font-size:15px}
+
+    .cards{display:grid;grid-template-columns:1fr;gap:18px}
+    @media(min-width:850px){.cards{grid-template-columns:1fr 1fr}}
+    @media(min-width:1150px){.cards{grid-template-columns:1fr 1fr 1fr}}
+
+    .card{background:var(--card);border:1px solid #eef2ff;border-radius:16px;padding:18px;box-shadow:var(--shadow);display:flex;gap:14px}
+    .avatar{width:58px;height:58px;border-radius:14px;background:#eef2ff;display:grid;place-items:center;font-size:24px}
+    .name{font-weight:700;font-size:16px}
+    .meta{font-size:14px;color:var(--muted)}
+    .tag{padding:6px 10px;border-radius:999px;background:#eef2ff;color:#1e40af;font-weight:600;font-size:12px;text-decoration:none;display:inline-block;margin-top:6px}
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <span class="logo">🎓</span>
+        <span>College Placement Connect</span>
+      </div>
+      <div class="menu">
+        <a href="dash.html">Dashboard</a>
+        <a href="#">Companies</a>
+        <a href="alumni.html" style="font-weight:800">Alumni</a>
+        <!-- Replaced plain link with a real logout button -->
+        <button class="logout" onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>Alumni Network</h1>
+      <p>Find seniors working in companies you're aiming for — reach out, get guidance, and build your network.</p>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="searchbar">
+      <span>🔎</span>
+      <input id="search" placeholder="Search name, role, or company..." oninput="apply()" />
+    </div>
+
+    <div class="cards" id="cards"></div>
+  </div>
+
+  <script>
+    // Simple logout: clear demo storage & go to home (1.html)
+    function logout(){
+      try {
+        localStorage.removeItem('students'); // demo data
+        // add/remove other keys as needed, e.g. localStorage.removeItem('auth')
+      } catch(e){}
+      window.location.href = '1.html';
+    }
+
+    const alumni = [
+      { name:'Aarav N', company:'Microsoft', role:'SDE', grad:2021, email:'aarav.n@alumni.bmsce.ac.in', branch:'CSE' },
+      { name:'Diya S', company:'Google', role:'SWE', grad:2022, email:'diya.s@alumni.bmsce.ac.in', branch:'ISE' },
+      { name:'Rahul K', company:'Flipkart', role:'SDE-1', grad:2020, email:'rahul.k@alumni.bmsce.ac.in', branch:'CSE' },
+      { name:'Meera P', company:'Cisco', role:'Network Eng.', grad:2019, email:'meera.p@alumni.bmsce.ac.in', branch:'ECE' },
+      { name:'Varun B', company:'Infosys', role:'System Eng.', grad:2021, email:'varun.b@alumni.bmsce.ac.in', branch:'EEE' }
+    ];
+
+    function render(list){
+      const wrap=document.getElementById('cards'); wrap.innerHTML='';
+      list.forEach(a=>{
+        wrap.innerHTML += `
+          <div class="card">
+            <div class="avatar">👤</div>
+            <div>
+              <div class="name">${a.name}</div>
+              <div class="meta">${a.role} • ${a.company}</div>
+              <div class="meta">Batch ${a.grad} • ${a.branch}</div>
+              <a class="tag" href="mailto:${a.email}">Email</a>
+            </div>
+          </div>`;
+      });
+      if(list.length===0){ wrap.innerHTML='<p style="text-align:center;color:var(--muted)">No matching alumni.</p>'; }
+    }
+
+    function apply(){
+      const q=document.getElementById('search').value.toLowerCase();
+      render(alumni.filter(a =>
+        (a.name + a.company + a.role + a.branch).toLowerCase().includes(q)
+      ));
+    }
+
+    render(alumni);
+  </script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BMSCE • Placement & Alumni Connect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #f7f9fc; --card: #ffffff; --text: #0f172a; --muted: #4b5563;
+      --ring: #dbeafe; --blue: #2563eb; --purple: #7c3aed;
+      --shadow: 0 10px 25px rgba(2,6,23,0.08);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Inter",system-ui,Segoe UI,Roboto,Helvetica,Arial;
+      color:var(--text);
+      background:radial-gradient(1200px 800px at 10% -10%,#eef2ff 0%,transparent 60%),
+                 radial-gradient(1000px 700px at 110% 10%,#e0f2fe 0%,transparent 55%),
+                 var(--bg);
+    }
+    .container{max-width:1100px;margin:0 auto;padding:40px 20px 80px}
+    header{text-align:center;margin-bottom:32px}
+    .badge{display:inline-flex;align-items:center;gap:.5rem;border:1px solid #e5e7eb;padding:.35rem .65rem;border-radius:999px;background:#fff;box-shadow:var(--shadow)}
+    .title{font-weight:800;font-size:28px;margin:18px 0 8px}
+    .subtitle{font-size:18px;color:var(--muted);max-width:900px;margin:0 auto}
+    .grid{display:grid;grid-template-columns:1fr;gap:28px;margin-top:36px}
+    @media(min-width:900px){.grid{grid-template-columns:1fr 1fr}}
+    .card{
+      background:var(--card);border:1px solid #eef2ff;border-radius:18px;
+      padding:28px 26px 24px;box-shadow:var(--shadow);
+      transition:transform .2s,box-shadow .2s,border-color .2s;
+    }
+    .card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(2,6,23,.12);border-color:var(--ring)}
+    .card-header{display:flex;align-items:center;gap:16px;margin-bottom:10px}
+    .icon{width:64px;height:64px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(135deg,#e0e7ff,#eff6ff);color:#1e3a8a;font-size:30px}
+    .icon.purple{background:linear-gradient(135deg,#f3e8ff,#efe9ff);color:#6b21a8}
+    .h3{font-size:20px;font-weight:700;margin:0}
+    .desc{color:var(--muted);line-height:1.6;margin:6px 0 14px}
+    .list{margin:0 0 22px 0;padding-left:20px;color:#334155}
+    .list li{margin:8px 0}
+    .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+      border:none;border-radius:12px;padding:14px 16px;font-size:16px;font-weight:600;
+      cursor:pointer;color:#fff;transition:filter .15s,transform .05s}
+    .btn:active{transform:translateY(1px)}
+    .btn-blue{background:linear-gradient(135deg,#3b82f6,#1d4ed8)}
+    .btn-purple{background:linear-gradient(135deg,#8b5cf6,#6d28d9)}
+    .footer{margin-top:26px;text-align:center}
+    .link{display:inline-flex;align-items:center;gap:8px;font-weight:600;text-decoration:none;
+      color:#111827;border:1px solid #e5e7eb;background:#fff;border-radius:999px;padding:10px 14px;box-shadow:var(--shadow)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="badge">Welcome to <strong>BMSCE</strong></span>
+      <h1 class="title">Placement & Alumni Connect</h1>
+      <p class="subtitle">Connect with alumni, explore placement opportunities, and discover your career path.</p>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <div class="card-header">
+          <div class="icon">🎓</div>
+          <div>
+            <h2 class="h3">Student Portal</h2>
+            <p class="desc">View placements and connect with alumni.</p>
+          </div>
+        </div>
+        <ul class="list">
+          <li>Placement company history</li>
+          <li>Alumni contact records</li>
+          <li>Role insights</li>
+        </ul>
+        <a href="st.html"><button class="btn btn-blue">Student Login</button></a>
+      </section>
+
+      <section class="card">
+        <div class="card-header">
+          <div class="icon purple">🛡️</div>
+          <div>
+            <h2 class="h3">Admin Portal</h2>
+            <p class="desc">Manage placement and alumni data.</p>
+          </div>
+        </div>
+        <ul class="list">
+          <li>Update records</li>
+          <li>Manage alumni</li>
+          <li>Track company visits</li>
+        </ul>
+        <a href="adminlogin.html"><button class="btn btn-purple">Admin Login</button></a>
+      </section>
+    </main>
+
+    <div class="footer">
+      <a class="link" href="dash.html">Browse as Guest</a>
+    </div>
+  </div>
+</body>
+</html>
