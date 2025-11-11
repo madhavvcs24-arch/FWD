@@ -1,123 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Student Login • College Placement Connect</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
+    :root{
+      --bg:#f7f9fc;--card:#ffffff;--text:#0f172a;--muted:#475569;--ring:#dbeafe;
+      --gradTop:#0b63f3;--gradBot:#0a3be0;--shadow:0 12px 30px rgba(2,6,23,.10);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
     body{
-      margin:0;
-      font-family:Inter, sans-serif;
-      background:linear-gradient(135deg,#0b63f3,#0a3be0);
+      font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 10% -10%, #eef2ff 0%, transparent 60%),
+        radial-gradient(1000px 700px at 110% 10%, #e0f2fe 0%, transparent 55%),
+        var(--bg);
+      min-height:100vh;
       display:flex;
       justify-content:center;
       align-items:center;
-      height:100vh;
-      color:#fff;
+      padding:20px;
     }
-
     .card{
-      background:#ffffff;
-      width:360px;
-      padding:30px;
-      border-radius:16px;
-      box-shadow:0 12px 30px rgba(0,0,0,.18);
-      color:#0f172a;
+      background:var(--card);
+      width:100%;
+      max-width:460px;
+      padding:38px 32px;
+      border-radius:18px;
+      box-shadow:var(--shadow);
+      border:1px solid #eef2ff;
     }
-
-    .title{
-      font-size:22px;
-      font-weight:700;
-      margin-bottom:18px;
-      text-align:center;
-    }
-
+    h1{font-size:26px;font-weight:800;text-align:center;margin-bottom:8px}
+    p.sub{text-align:center;color:var(--muted);margin-bottom:26px}
+    label{font-weight:600;margin-bottom:6px;display:block}
     .input{
-      width:100%;
-      padding:12px;
-      border-radius:10px;
-      border:1px solid #d0d7e2;
-      margin-top:10px;
-      outline:none;
-      font-size:15px;
+      width:100%;padding:12px 14px;border-radius:12px;border:1px solid #e5e7eb;
+      outline:none;font-size:15px;margin-bottom:16px;background:#fff;
     }
-
+    .input:focus{border-color:#93c5fd;box-shadow:0 0 0 4px var(--ring)}
     .btn{
-      width:100%;
-      padding:12px;
-      border:0;
-      border-radius:12px;
-      background:linear-gradient(135deg,#3b82f6,#1d4ed8);
-      color:white;
-      font-weight:700;
-      margin-top:18px;
-      cursor:pointer;
+      width:100%;border:0;padding:13px;border-radius:12px;font-weight:700;font-size:16px;
+      background:linear-gradient(135deg,var(--gradTop),var(--gradBot));color:#fff;cursor:pointer;margin-top:6px;
     }
-
-    .back-btn{
-      background:none;
-      border:none;
-      font-size:15px;
-      color:#ffffff;
-      cursor:pointer;
-      position:absolute;
-      top:20px;
-      left:20px;
-      font-weight:600;
-    }
-
-    .extra{
-      text-align:center;
-      margin-top:14px;
-      font-size:14px;
-    }
-    .extra a{
-      color:#1d4ed8;
-      font-weight:600;
-      text-decoration:none;
-    }
-    .extra a:hover{ text-decoration:underline; }
+    .toplinks{position:absolute;top:18px;left:18px;right:18px;display:flex;justify-content:space-between}
+    .link{font-weight:600;text-decoration:none;color:#111827}
+    .meta{margin-top:10px;text-align:center;color:var(--muted);font-size:14px}
+    .meta a{color:#111827;text-decoration:none;font-weight:700}
   </style>
-
 </head>
 <body>
-
-  <!-- ✅ Working Back Button -->
-  <button class="back-btn" onclick="window.location.href='index.html'">← Back</button>
+  <div class="toplinks">
+    <a class="link" href="#" onclick="goBack();return false;">← Back</a>
+    <a class="link" href="1.html">Home</a>
+  </div>
 
   <div class="card">
-    <div class="title">Student Login</div>
+    <h1>Student Login</h1>
+    <p class="sub">Sign in using your college credentials</p>
 
-    <input type="text" class="input" id="username" placeholder="Enter Username" />
-    <input type="password" class="input" id="password" placeholder="Enter Password" />
+    <label for="usn">USN / College Email</label>
+    <input id="usn" class="input" type="text" placeholder="1BM21CS123 / name@bmsce.ac.in">
 
-    <button class="btn" onclick="login()">Login</button>
+    <label for="pwd">Password</label>
+    <input id="pwd" class="input" type="password" placeholder="••••••••">
 
-    <div class="extra">
-      Don't have an account? <a href="signup.html">Sign Up</a>
-    </div>
+    <button class="btn" onclick="login()">Sign In</button>
+
+    <p class="meta">New here? <a href="sgn up.html">Create your account</a></p>
   </div>
 
   <script>
+    function goBack(){
+      if (history.length > 1) { history.back(); }
+      else { location.href = '1.html'; }   // fallback to landing
+    }
     function login(){
-      // Temporary login (adjust later if needed)
-      const user = document.getElementById("username").value.trim();
-      const pass = document.getElementById("password").value.trim();
-
-      if(user === "" || pass === ""){
-        alert("Please enter username and password");
-        return;
-      }
-
-      // Basic login success redirect
-      window.location.href = "dash.html";
+      const id = document.getElementById('usn').value.trim();
+      const pw = document.getElementById('pwd').value.trim();
+      if(!id || !pw){ alert('Please fill both fields.'); return; }
+      // demo: mark logged in and go to dashboard
+      localStorage.setItem('loggedIn', 'student');
+      window.location.href = 'dash.html';
     }
   </script>
-
 </body>
 </html>
