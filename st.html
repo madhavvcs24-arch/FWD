@@ -9,8 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#f7f9fc;--card:#ffffff;--text:#0f172a;--muted:#475569;--ring:#dbeafe;
-      --gradTop:#0b63f3;--gradBot:#0a3be0;--shadow:0 12px 30px rgba(2,6,23,.10);
+      --bg:#f7f9fc; --card:#ffffff; --text:#0f172a; --muted:#475569; --ring:#dbeafe;
+      --shadow:0 12px 30px rgba(2,6,23,.10);
     }
     *{box-sizing:border-box;margin:0;padding:0}
     body{
@@ -20,44 +20,36 @@
         radial-gradient(1200px 800px at 10% -10%, #eef2ff 0%, transparent 60%),
         radial-gradient(1000px 700px at 110% 10%, #e0f2fe 0%, transparent 55%),
         var(--bg);
-      min-height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      padding:20px;
+      min-height:100vh; display:flex; justify-content:center; align-items:center; padding:24px;
     }
     .card{
-      background:var(--card);
-      width:100%;
-      max-width:460px;
-      padding:38px 32px;
-      border-radius:18px;
-      box-shadow:var(--shadow);
-      border:1px solid #eef2ff;
+      background:var(--card); width:100%; max-width:480px; padding:34px 28px;
+      border-radius:18px; border:1px solid #eef2ff; box-shadow:var(--shadow);
     }
     h1{font-size:26px;font-weight:800;text-align:center;margin-bottom:8px}
-    p.sub{text-align:center;color:var(--muted);margin-bottom:26px}
-    label{font-weight:600;margin-bottom:6px;display:block}
+    p.sub{color:var(--muted);text-align:center;margin-bottom:24px}
+    label{display:block;font-weight:600;margin:10px 0 6px}
     .input{
-      width:100%;padding:12px 14px;border-radius:12px;border:1px solid #e5e7eb;
-      outline:none;font-size:15px;margin-bottom:16px;background:#fff;
+      width:100%; padding:12px 14px; border-radius:12px; border:1px solid #e5e7eb;
+      outline:none; font-size:15px;
     }
-    .input:focus{border-color:#93c5fd;box-shadow:0 0 0 4px var(--ring)}
+    .input:focus{border-color:#93c5fd; box-shadow:0 0 0 4px var(--ring)}
     .btn{
-      width:100%;border:0;padding:13px;border-radius:12px;font-weight:700;font-size:16px;
-      background:linear-gradient(135deg,var(--gradTop),var(--gradBot));color:#fff;cursor:pointer;margin-top:6px;
+      width:100%; border:0; padding:13px; border-radius:12px; font-weight:700; font-size:16px;
+      background:linear-gradient(135deg,#3b82f6,#1d4ed8); color:#fff; cursor:pointer; margin-top:10px;
     }
-    .toplinks{position:absolute;top:18px;left:18px;right:18px;display:flex;justify-content:space-between}
-    .link{font-weight:600;text-decoration:none;color:#111827}
-    .meta{margin-top:10px;text-align:center;color:var(--muted);font-size:14px}
-    .meta a{color:#111827;text-decoration:none;font-weight:700}
+    .row{display:flex; justify-content:space-between; align-items:center; margin-top:12px}
+    .link{color:#111827; font-weight:600; text-decoration:none}
+    .toplink{
+      position:absolute; top:18px; left:18px; text-decoration:none; font-weight:600; color:#111827;
+      border:1px solid #e5e7eb; background:#fff; padding:8px 12px; border-radius:999px; box-shadow:var(--shadow);
+    }
+    .hint{font-size:13px;color:var(--muted); text-align:center; margin-top:12px}
   </style>
 </head>
 <body>
-  <div class="toplinks">
-    <a class="link" href="#" onclick="goBack();return false;">← Back</a>
-    <a class="link" href="1.html">Home</a>
-  </div>
+  <!-- Back works even if opened directly (falls back to index.html) -->
+  <a href="index.html" class="toplink" onclick="goBack(event)">← Back</a>
 
   <div class="card">
     <h1>Student Login</h1>
@@ -71,20 +63,24 @@
 
     <button class="btn" onclick="login()">Sign In</button>
 
-    <p class="meta">New here? <a href="sgn up.html">Create your account</a></p>
+    <p class="hint">New here?
+      <!-- link to your current file name with space -->
+      <a class="link" href="sgn%20up.html">Create an account</a>
+    </p>
   </div>
 
   <script>
-    function goBack(){
-      if (history.length > 1) { history.back(); }
-      else { location.href = '1.html'; }   // fallback to landing
+    function goBack(e){
+      if(e) e.preventDefault();
+      if (history.length > 1) history.back();
+      else window.location.href = 'index.html'; // change to '1.html' if you keep that filename
     }
     function login(){
       const id = document.getElementById('usn').value.trim();
       const pw = document.getElementById('pwd').value.trim();
       if(!id || !pw){ alert('Please fill both fields.'); return; }
-      // demo: mark logged in and go to dashboard
-      localStorage.setItem('loggedIn', 'student');
+      // demo: store a flag so Logout can clear it later
+      localStorage.setItem('currentStudent', id);
       window.location.href = 'dash.html';
     }
   </script>
